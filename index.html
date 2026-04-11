@@ -716,6 +716,8 @@
     <div class="hero-slide" style="background-image: url('1775926214261.jpeg')"></div>
     <div class="hero-slide" style="background-image: url('coliseu_fightteam_1775930534627.webp'); background-position: center top;"></div>
     <div class="hero-slide" style="background-image: url('imagem_2026-04-11_150335011.png'); background-position: center top;"></div>
+    <div class="hero-slide" style="background-image: url('Captura_de_tela_2026-04-11_151134.png'); background-position: center top;"></div>
+    <div class="hero-slide" style="background-image: url('Captura_de_tela_2026-04-11_151129.png'); background-position: center top;"></div>
   </div>
 
   <div class="hero-content">
@@ -739,6 +741,8 @@
     <div class="hero-dot" onclick="goSlide(4)"></div>
     <div class="hero-dot" onclick="goSlide(5)"></div>
     <div class="hero-dot" onclick="goSlide(6)"></div>
+    <div class="hero-dot" onclick="goSlide(7)"></div>
+    <div class="hero-dot" onclick="goSlide(8)"></div>
   </div>
 </div>
 
@@ -785,6 +789,8 @@
     <div class="gallery-item" style="background-image: url('1775926208218.jpeg')"></div>
     <div class="gallery-item" style="background-image: url('coliseu_fightteam_1775930534627.webp'); background-position: center top;"></div>
     <div class="gallery-item" style="background-image: url('imagem_2026-04-11_150335011.png'); background-position: center top;"></div>
+    <div class="gallery-item" style="background-image: url('Captura_de_tela_2026-04-11_151134.png'); background-position: center top;"></div>
+    <div class="gallery-item" style="background-image: url('Captura_de_tela_2026-04-11_151129.png'); background-position: center top;"></div>
   </div>
 </section>
 
@@ -810,10 +816,7 @@
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
         Institucional
       </button>
-      <button class="tab-btn" onclick="showTab('upload', this)">
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16,16 12,12 8,16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-        Anexar Arquivos
-      </button>
+
     </div>
 
     <!-- DOCUMENTOS -->
@@ -884,26 +887,6 @@
         </div>
       </div>
     </div>
-
-    <!-- UPLOAD -->
-    <div class="tab-content" id="tab-upload">
-      <h3 style="font-family:'Sora',sans-serif;font-size:20px;margin-bottom:8px;">Anexar Novos Arquivos</h3>
-      <p style="color:#4a5568;font-size:14px;margin-bottom:24px;">Faça upload de documentos para publicar na área de transparência. Formatos aceitos: PDF, DOC, DOCX, XLS, XLSX.</p>
-
-      <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-        <div class="upload-icon">📁</div>
-        <div class="upload-text">Clique para selecionar arquivos</div>
-        <div class="upload-sub">ou arraste e solte aqui · PDF, DOC, XLS até 20 MB</div>
-        <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.xls,.xlsx" multiple style="display:none" onchange="handleFiles(this.files)"/>
-      </div>
-
-      <div id="uploadedFilesList" style="display:none;">
-        <h4 style="font-family:'Sora',sans-serif;font-size:15px;margin-bottom:14px;color:var(--navy);">Arquivos selecionados:</h4>
-        <div id="filesListItems" style="display:flex;flex-direction:column;gap:10px;"></div>
-        <button onclick="publishFiles()" style="margin-top:20px;background:var(--blue);color:white;border:none;padding:12px 24px;border-radius:10px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;cursor:pointer;">
-          Publicar Documentos
-        </button>
-      </div>
     </div>
   </div>
 </section>
@@ -1013,32 +996,6 @@
       searchResults.style.display = 'none';
     }
   });
-
-  // File upload
-  function handleFiles(files) {
-    const list = document.getElementById('filesListItems');
-    const wrap = document.getElementById('uploadedFilesList');
-    list.innerHTML = '';
-    Array.from(files).forEach(file => {
-      const item = document.createElement('div');
-      item.style.cssText = 'display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8fafd;border-radius:10px;border:1px solid #e8edf5;';
-      item.innerHTML = `<span style="font-size:22px">${file.name.endsWith('.pdf') ? '📄' : '📊'}</span>
-        <div>
-          <div style="font-weight:600;font-size:14px">${file.name}</div>
-          <div style="font-size:12px;color:#8898aa">${(file.size / 1024).toFixed(0)} KB</div>
-        </div>`;
-      list.appendChild(item);
-    });
-    wrap.style.display = 'block';
-  }
-
-  function publishFiles() {
-    alert('Funcionalidade de publicação disponível com integração ao servidor. Arquivos selecionados com sucesso!');
-  }
-
-  // Drag & drop
-  const uploadArea = document.querySelector('.upload-area');
-  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = 'var(--sky)'; });
   uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = '#c8d8ef'; });
   uploadArea.addEventListener('drop', e => {
     e.preventDefault();
