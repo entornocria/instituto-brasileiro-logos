@@ -117,6 +117,62 @@
       opacity: 0.5;
     }
 
+    .search-results {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 300px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 16px 50px rgba(15,31,75,0.18);
+      overflow: hidden;
+      z-index: 200;
+    }
+
+    .search-results-header {
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8898aa;
+      border-bottom: 1px solid #e8edf5;
+      background: #f8fafd;
+    }
+
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: var(--navy);
+      transition: 0.15s;
+      border-bottom: 1px solid #f0f4fb;
+    }
+
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: #f6f9ff; }
+
+    .search-result-icon {
+      font-size: 18px;
+      width: 34px; height: 34px;
+      background: #e8f0fe;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .search-result-title { font-weight: 600; font-size: 14px; }
+    .search-result-desc { font-size: 12px; color: #8898aa; margin-top: 1px; }
+
+    .search-no-results {
+      padding: 24px 16px;
+      text-align: center;
+      color: #8898aa;
+      font-size: 14px;
+    }
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -641,18 +697,20 @@
     <li><a href="#contato">Contato</a></li>
   </ul>
 
-  <div class="search-wrap">
-    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+  <div class="search-wrap" id="searchWrap">
+    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24" style="cursor:pointer" onclick="toggleSearch()">
       <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
     </svg>
-    <input type="text" placeholder="Buscar documentos…" id="searchInput" oninput="handleSearch(this.value)"/>
+    <input type="text" placeholder="Buscar documentos…" id="searchInput" oninput="handleSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()"/>
+    <div id="searchResults" class="search-results" style="display:none;"></div>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-slider" id="heroSlider">
-    <div class="hero-slide active" style="background-image: url('1775926210679.jpeg')"></div>
+    <div class="hero-slide active" style="background-image: url('institutobrasileirologos_1775926204253.webp'); background-position: center top;"></div>
+    <div class="hero-slide" style="background-image: url('1775926210679.jpeg')"></div>
     <div class="hero-slide" style="background-image: url('1775926212347.jpeg')"></div>
     <div class="hero-slide" style="background-image: url('1775926208218.jpeg')"></div>
     <div class="hero-slide" style="background-image: url('1775926214261.jpeg')"></div>
@@ -676,6 +734,7 @@
     <div class="hero-dot" onclick="goSlide(1)"></div>
     <div class="hero-dot" onclick="goSlide(2)"></div>
     <div class="hero-dot" onclick="goSlide(3)"></div>
+    <div class="hero-dot" onclick="goSlide(4)"></div>
   </div>
 </div>
 
@@ -858,11 +917,11 @@
     <a href="#sobre">Sobre</a>
     <a href="#galeria">Galeria</a>
     <a href="#transparencia">Transparência</a>
-    <a href="mailto:contato@ibl.org.br">contato@ibl.org.br</a>
+    <a href="/cdn-cgi/l/email-protection#12717d7c6673667d527b707e3c7d60753c7060"><span class="__cf_email__" data-cfemail="3655595842574259765f545a18594451185444">[email&#160;protected]</span></a>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Hero slider
   let currentSlide = 0;
   const slides = document.querySelectorAll('.hero-slide');
@@ -886,19 +945,74 @@
     btn.classList.add('active');
   }
 
-  // Search
-  function handleSearch(query) {
-    const q = query.toLowerCase();
-    const cards = document.querySelectorAll('#docsGrid .doc-card');
+  // All searchable docs
+  const allDocs = [
+    { icon: '📄', title: 'Ata da Assembleia', desc: 'Decisões e registros oficiais', href: 'documentos/ata.pdf', tags: 'ata assembleia decisoes registros' },
+    { icon: '🏥', title: 'Comprovantes de Cirurgia', desc: 'Documentos e registros médicos', href: 'documentos/cirurgia.pdf', tags: 'cirurgia medico saude comprovantes' },
+    { icon: '🏛️', title: 'Sede e Objetivos', desc: 'Definição institucional', href: 'documentos/sede.pdf', tags: 'sede objetivos institucional estatuto' },
+    { icon: '📊', title: 'Situação Fiscal', desc: 'Dados e regularidade fiscal', href: 'documentos/fiscal.pdf', tags: 'fiscal dados regularidade tributaria certidao' },
+    { icon: '📋', title: 'Relatório Contábil', desc: 'Demonstrativos contábeis', href: 'documentos/fiscal.pdf', tags: 'contabil relatorio demonstrativos prestacao contas' },
+  ];
 
-    // Switch to documents tab if not already
-    showTab('documentos', document.querySelector('.tab-btn'));
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
 
-    cards.forEach(card => {
-      const searchable = (card.dataset.search + ' ' + card.querySelector('.doc-title').textContent).toLowerCase();
-      card.style.display = searchable.includes(q) || q === '' ? '' : 'none';
-    });
+  function toggleSearch() {
+    searchInput.focus();
+    if (searchInput.value.trim()) {
+      searchResults.style.display = 'block';
+    }
   }
+
+  function closeSearch() {
+    searchResults.style.display = 'none';
+    searchInput.value = '';
+  }
+
+  function handleSearch(query) {
+    const q = query.trim().toLowerCase();
+    if (!q) { searchResults.style.display = 'none'; return; }
+
+    const matches = allDocs.filter(d =>
+      (d.title + ' ' + d.tags + ' ' + d.desc).toLowerCase().includes(q)
+    );
+
+    searchResults.innerHTML = '';
+
+    const header = document.createElement('div');
+    header.className = 'search-results-header';
+    header.textContent = matches.length ? `${matches.length} resultado(s) encontrado(s)` : 'Nenhum resultado';
+    searchResults.appendChild(header);
+
+    if (!matches.length) {
+      const empty = document.createElement('div');
+      empty.className = 'search-no-results';
+      empty.textContent = 'Nenhum documento encontrado para "' + query + '"';
+      searchResults.appendChild(empty);
+    } else {
+      matches.forEach(doc => {
+        const item = document.createElement('a');
+        item.href = doc.href;
+        item.target = '_blank';
+        item.className = 'search-result-item';
+        item.innerHTML = \`<div class="search-result-icon">\${doc.icon}</div>
+          <div>
+            <div class="search-result-title">\${doc.title}</div>
+            <div class="search-result-desc">\${doc.desc}</div>
+          </div>\`;
+        searchResults.appendChild(item);
+      });
+    }
+
+    searchResults.style.display = 'block';
+  }
+
+  // Close search on outside click
+  document.addEventListener('click', e => {
+    if (!document.getElementById('searchWrap').contains(e.target)) {
+      searchResults.style.display = 'none';
+    }
+  });
 
   // File upload
   function handleFiles(files) {
@@ -936,11 +1050,4 @@
   const sections = document.querySelectorAll('section[id], div[id]');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-  });
-</script>
-</body>
-</html>
+    sections.forEach(s => {
