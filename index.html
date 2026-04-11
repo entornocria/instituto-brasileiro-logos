@@ -4,146 +4,943 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Instituto Brasileiro Logos – IBL</title>
-
-  <meta name="description" content="Instituto Brasileiro Logos – Transparência, documentos oficiais e atuação social." />
-
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-
+  <meta name="description" content="Instituto Brasileiro Logos – Transformando vidas através do Jiu-Jitsu e do esporte social." />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #f4f7fb;
-      margin: 0;
-      color: #1a2340;
+    :root {
+      --navy: #0f1f4b;
+      --blue: #1a3a8f;
+      --sky: #2a7fc4;
+      --green: #3a8f3a;
+      --light-green: #4caf50;
+      --white: #ffffff;
+      --off-white: #f0f4fb;
+      --gray: #8898aa;
+      --card-bg: #ffffff;
+      --shadow: 0 8px 40px rgba(15,31,75,0.10);
     }
 
-    .hero {
-      background: linear-gradient(135deg, #1a3a8f, #0a4d80);
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(15,31,75,0.96);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-text {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
       color: white;
-      text-align: center;
-      padding: 80px 20px;
+      line-height: 1.2;
+    }
+
+    .nav-logo-text span { color: #6ec6f5; font-weight: 300; }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: white;
+      background: rgba(255,255,255,0.10);
+    }
+
+    /* ── SEARCH BAR ── */
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap input {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 40px;
+      padding: 8px 18px 8px 38px;
+      color: white;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      width: 200px;
+      outline: none;
+      transition: 0.25s;
+    }
+
+    .search-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+    .search-wrap input:focus {
+      background: rgba(255,255,255,0.13);
+      border-color: rgba(110,198,245,0.5);
+      width: 240px;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.5;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .hero-slide.active { opacity: 1; }
+
+    .hero-slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(10,20,60,0.82) 40%, rgba(10,40,80,0.45) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 0 60px;
+      color: white;
+      animation: fadeUp 1s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(74,207,80,0.18);
+      border: 1px solid rgba(74,207,80,0.35);
+      border-radius: 40px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #7de87f;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #7de87f;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
     }
 
     .hero h1 {
       font-family: 'Sora', sans-serif;
-      font-size: 36px;
-      margin-bottom: 10px;
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #6ec6f5;
     }
 
     .hero p {
+      font-size: 18px;
       opacity: 0.8;
+      line-height: 1.6;
+      max-width: 520px;
+      margin-bottom: 34px;
     }
 
-    .section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 60px 20px;
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
-    .section-title {
-      text-transform: uppercase;
-      font-size: 12px;
-      color: #2a52c9;
-      font-weight: bold;
-    }
-
-    .section-heading {
-      font-size: 28px;
-      margin-bottom: 30px;
-      font-family: 'Sora';
-    }
-
-    .docs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .doc-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
+    .btn-primary {
+      background: var(--sky);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
       text-decoration: none;
-      color: inherit;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      transition: 0.25s;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .doc-card:hover {
-      transform: translateY(-5px);
+    .btn-primary:hover { background: #1e6fb0; transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
     }
 
-    .card-icon {
-      font-size: 28px;
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: white; }
+
+    /* dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 36px;
+      left: 60px;
+      z-index: 3;
+      display: flex;
+      gap: 8px;
+    }
+
+    .hero-dot {
+      width: 8px; height: 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .hero-dot.active {
+      background: white;
+      width: 24px;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--navy);
+      padding: 30px 60px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+      color: white;
+    }
+
+    .stat-number {
+      font-family: 'Sora', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: #6ec6f5;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      opacity: 0.6;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 90px 40px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--sky);
       margin-bottom: 10px;
     }
 
-    .card-title {
-      font-weight: bold;
-      margin-bottom: 6px;
+    .section-heading {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 14px;
     }
 
-    .card-desc {
+    .section-sub {
+      color: var(--gray);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 560px;
+      margin-bottom: 50px;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+      gap: 12px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .gallery-item {
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,20,60,0.5) 0%, transparent 60%);
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .gallery-item:hover::after { opacity: 1; }
+
+    .gallery-item:hover { transform: scale(1.015); transition: transform 0.4s ease; }
+
+    /* ── TABS ── */
+    .tabs-wrap {
+      background: white;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .tabs-header {
+      display: flex;
+      border-bottom: 1px solid #e8edf5;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 18px 20px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
       font-size: 14px;
-      color: #666;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--gray);
+      transition: 0.2s;
+      border-bottom: 3px solid transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    footer {
-      background: #1a2340;
-      color: white;
+    .tab-btn:hover { color: var(--blue); background: #f6f9ff; }
+
+    .tab-btn.active {
+      color: var(--blue);
+      border-bottom-color: var(--sky);
+      background: #f6f9ff;
+    }
+
+    .tab-content { display: none; padding: 40px; }
+    .tab-content.active { display: block; }
+
+    /* ── DOCS GRID ── */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .doc-card {
+      border: 1.5px solid #e8edf5;
+      border-radius: 14px;
+      padding: 22px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: 0.25s;
+      background: #fafbff;
+      cursor: pointer;
+    }
+
+    .doc-card:hover {
+      border-color: var(--sky);
+      background: white;
+      box-shadow: 0 6px 24px rgba(42,127,196,0.10);
+      transform: translateY(-3px);
+    }
+
+    .doc-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      background: #e8f0fe;
+    }
+
+    .doc-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .doc-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .doc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #3a8f3a;
+      background: #e8f5e8;
+      border-radius: 6px;
+      padding: 3px 8px;
+      width: fit-content;
+    }
+
+    /* Upload area */
+    .upload-area {
+      border: 2px dashed #c8d8ef;
+      border-radius: 14px;
+      padding: 40px;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      margin-bottom: 28px;
+      transition: 0.2s;
+      cursor: pointer;
+      background: #f8fafd;
+    }
+
+    .upload-area:hover {
+      border-color: var(--sky);
+      background: #f0f6ff;
+    }
+
+    .upload-icon { font-size: 36px; margin-bottom: 10px; }
+
+    .upload-text {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .upload-sub { font-size: 13px; color: var(--gray); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-img {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 20px 60px rgba(15,31,75,0.15);
+    }
+
+    .about-text .section-heading { margin-bottom: 20px; }
+
+    .about-text p {
+      color: #4a5568;
+      line-height: 1.75;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+
+    .values-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+    }
+
+    .value-dot {
+      width: 24px; height: 24px;
+      border-radius: 8px;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer strong { color: white; }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d0ddf0, transparent);
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero-content { padding: 0 24px; }
+      .hero-dots { left: 24px; }
+      .section { padding: 60px 20px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-row: auto; grid-column: 1 / 3; height: 240px; }
+      .gallery-item { height: 160px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .stats-strip { padding: 24px 20px; gap: 30px; }
+      footer { padding: 28px 20px; flex-direction: column; text-align: center; }
+      .tabs-header { flex-wrap: wrap; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>Instituto Brasileiro Logos</h1>
-    <p>Transparência, responsabilidade e impacto social</p>
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">
+    <!-- IBL Logo SVG inline -->
+    <svg width="46" height="36" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="10" width="7" height="26" rx="2" fill="#3a8f3a"/>
+      <!-- leaves -->
+      <path d="M3.5 10 C1 5, -2 1, 3.5 0 C9 1, 6 5, 3.5 10Z" fill="#4caf50"/>
+      <path d="M3.5 10 C6 5, 10 1, 3.5 0 C-3 1, 1 5, 3.5 10Z" fill="#66bb6a"/>
+      <!-- B -->
+      <rect x="9" y="10" width="7" height="26" rx="2" fill="#1a3a8f"/>
+      <path d="M16 10 Q26 10 26 18 Q26 22.5 22 23.5 Q27 24.5 27 29.5 Q27 36 16 36 Z" fill="#1a3a8f"/>
+      <!-- L -->
+      <rect x="29" y="10" width="7" height="26" rx="2" fill="#2a7fc4"/>
+      <rect x="29" y="30" width="17" height="6" rx="2" fill="#2a7fc4"/>
+    </svg>
+    <div class="nav-logo-text">Instituto Brasileiro<br><span>Logos</span></div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#sobre" class="active">Início</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#transparencia">Transparência</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+
+  <div class="search-wrap">
+    <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" placeholder="Buscar documentos…" id="searchInput" oninput="handleSearch(this.value)"/>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide active" style="background-image: url('1775926210679.jpeg')"></div>
+    <div class="hero-slide" style="background-image: url('1775926212347.jpeg')"></div>
+    <div class="hero-slide" style="background-image: url('1775926208218.jpeg')"></div>
+    <div class="hero-slide" style="background-image: url('1775926214261.jpeg')"></div>
   </div>
 
-  <!-- DOCUMENTOS -->
-  <section class="section">
-    <div class="section-title">Transparência</div>
-    <h2 class="section-heading">Documentos Oficiais</h2>
-
-    <div class="docs-grid">
-
-      <a href="documentos/ata.pdf" target="_blank" class="doc-card">
-        <div class="card-icon">📄</div>
-        <div class="card-title">Ata da Assembleia</div>
-        <div class="card-desc">Decisões e registros oficiais da assembleia.</div>
+  <div class="hero-content">
+    <div class="hero-badge">Impacto Social</div>
+    <h1>Transformando vidas<br>pelo <em>Jiu-Jitsu</em></h1>
+    <p>O Instituto Brasileiro Logos usa o esporte como ferramenta de transformação social, desenvolvendo caráter, disciplina e comunidade.</p>
+    <div class="hero-ctas">
+      <a href="#transparencia" class="btn-primary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        Ver Documentos
       </a>
-
-      <a href="documentos/cirurgia.pdf" target="_blank" class="doc-card">
-        <div class="card-icon">🏥</div>
-        <div class="card-title">Comprovantes de Cirurgia</div>
-        <div class="card-desc">Documentos e registros médicos.</div>
-      </a>
-
-      <a href="documentos/sede.pdf" target="_blank" class="doc-card">
-        <div class="card-icon">🏛️</div>
-        <div class="card-title">Sede e Objetivos</div>
-        <div class="card-desc">Definição institucional do instituto.</div>
-      </a>
-
-      <a href="documentos/fiscal.pdf" target="_blank" class="doc-card">
-        <div class="card-icon">📊</div>
-        <div class="card-title">Situação Fiscal</div>
-        <div class="card-desc">Dados e regularidade fiscal.</div>
-      </a>
-
+      <a href="#sobre" class="btn-ghost">Conheça o IBL</a>
     </div>
-  </section>
+  </div>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2026 Instituto Brasileiro Logos – Todos os direitos reservados
-  </footer>
+  <div class="hero-dots" id="heroDots">
+    <div class="hero-dot active" onclick="goSlide(0)"></div>
+    <div class="hero-dot" onclick="goSlide(1)"></div>
+    <div class="hero-dot" onclick="goSlide(2)"></div>
+    <div class="hero-dot" onclick="goSlide(3)"></div>
+  </div>
+</div>
 
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat"><div class="stat-number">200+</div><div class="stat-label">Atletas Beneficiados</div></div>
+  <div class="stat"><div class="stat-number">5+</div><div class="stat-label">Anos de Atuação</div></div>
+  <div class="stat"><div class="stat-number">3</div><div class="stat-label">Núcleos Ativos</div></div>
+  <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Transparência</div></div>
+</div>
+
+<!-- SOBRE -->
+<section class="section" id="sobre">
+  <div class="about-grid">
+    <div class="about-img" style="background-image: url('institutobrasileirologos_1775926204253.webp')"></div>
+    <div class="about-text">
+      <div class="section-tag">Quem somos</div>
+      <h2 class="section-heading">Força, honra e transformação social</h2>
+      <p>O Instituto Brasileiro Logos (IBL) é uma organização sem fins lucrativos dedicada à promoção do bem-estar social por meio do esporte, especialmente o Jiu-Jitsu.</p>
+      <p>Acreditamos que o tatame é mais do que um local de treino — é um espaço de formação de caráter, superação de limites e construção de comunidade.</p>
+      <div class="values-list">
+        <div class="value-item"><div class="value-dot">✓</div><span>Desenvolvimento humano e esportivo</span></div>
+        <div class="value-item"><div class="value-dot">✓</div><span>Inclusão social e acessibilidade</span></div>
+        <div class="value-item"><div class="value-dot">✓</div><span>Transparência na gestão de recursos</span></div>
+        <div class="value-item"><div class="value-dot">✓</div><span>Parceria com comunidades vulneráveis</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- GALERIA -->
+<section class="section" id="galeria">
+  <div class="section-tag">Galeria</div>
+  <h2 class="section-heading">Nossa comunidade em ação</h2>
+  <p class="section-sub">Momentos reais de treino, evolução e superação dos nossos atletas.</p>
+
+  <div class="gallery-grid">
+    <div class="gallery-item" style="background-image: url('institutobrasileirologos_1775926204253.webp')"></div>
+    <div class="gallery-item" style="background-image: url('1775926214261.jpeg')"></div>
+    <div class="gallery-item" style="background-image: url('1775926212347.jpeg')"></div>
+    <div class="gallery-item" style="background-image: url('1775926210679.jpeg')"></div>
+    <div class="gallery-item" style="background-image: url('1775926208218.jpeg')"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TRANSPARÊNCIA COM TABS -->
+<section class="section" id="transparencia">
+  <div class="section-tag">Prestação de contas</div>
+  <h2 class="section-heading">Transparência institucional</h2>
+  <p class="section-sub">Acesse nossos documentos oficiais, registros e informações institucionais.</p>
+
+  <div class="tabs-wrap">
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="showTab('documentos', this)">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        Documentos
+      </button>
+      <button class="tab-btn" onclick="showTab('fiscal', this)">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Situação Fiscal
+      </button>
+      <button class="tab-btn" onclick="showTab('institucional', this)">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        Institucional
+      </button>
+      <button class="tab-btn" onclick="showTab('upload', this)">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16,16 12,12 8,16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+        Anexar Arquivos
+      </button>
+    </div>
+
+    <!-- DOCUMENTOS -->
+    <div class="tab-content active" id="tab-documentos">
+      <div class="docs-grid" id="docsGrid">
+        <a href="documentos/ata.pdf" target="_blank" class="doc-card" data-search="ata assembleia decisões registros">
+          <div class="doc-icon">📄</div>
+          <div class="doc-title">Ata da Assembleia</div>
+          <div class="doc-desc">Decisões e registros oficiais das assembleias do instituto.</div>
+          <div class="doc-badge">✓ Verificado</div>
+        </a>
+        <a href="documentos/cirurgia.pdf" target="_blank" class="doc-card" data-search="cirurgia médico saúde comprovantes">
+          <div class="doc-icon">🏥</div>
+          <div class="doc-title">Comprovantes de Cirurgia</div>
+          <div class="doc-desc">Documentos e registros médicos relacionados.</div>
+          <div class="doc-badge">✓ Verificado</div>
+        </a>
+        <a href="documentos/sede.pdf" target="_blank" class="doc-card" data-search="sede objetivos institucional definição">
+          <div class="doc-icon">🏛️</div>
+          <div class="doc-title">Sede e Objetivos</div>
+          <div class="doc-desc">Definição institucional e objetivos do instituto.</div>
+          <div class="doc-badge">✓ Verificado</div>
+        </a>
+        <a href="documentos/fiscal.pdf" target="_blank" class="doc-card" data-search="fiscal dados regularidade situação tributária">
+          <div class="doc-icon">📊</div>
+          <div class="doc-title">Situação Fiscal</div>
+          <div class="doc-desc">Dados e comprovantes de regularidade fiscal.</div>
+          <div class="doc-badge">✓ Verificado</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- FISCAL -->
+    <div class="tab-content" id="tab-fiscal">
+      <div style="max-width:600px;">
+        <h3 style="font-family:'Sora',sans-serif;font-size:20px;margin-bottom:12px;">Situação Fiscal Atual</h3>
+        <p style="color:#4a5568;line-height:1.7;margin-bottom:24px;">O Instituto Brasileiro Logos mantém total regularidade fiscal junto aos órgãos competentes. Abaixo estão os comprovantes disponíveis para consulta pública.</p>
+        <div class="docs-grid">
+          <a href="documentos/fiscal.pdf" target="_blank" class="doc-card">
+            <div class="doc-icon">📊</div>
+            <div class="doc-title">Certidão Fiscal</div>
+            <div class="doc-desc">Comprovante de regularidade fiscal e tributária.</div>
+            <div class="doc-badge">✓ Em dia</div>
+          </a>
+          <a href="documentos/ata.pdf" target="_blank" class="doc-card">
+            <div class="doc-icon">📋</div>
+            <div class="doc-title">Relatório Contábil</div>
+            <div class="doc-desc">Demonstrativos contábeis e prestação de contas.</div>
+            <div class="doc-badge">✓ Atualizado</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTITUCIONAL -->
+    <div class="tab-content" id="tab-institucional">
+      <div style="max-width:600px;">
+        <h3 style="font-family:'Sora',sans-serif;font-size:20px;margin-bottom:12px;">Documentos Institucionais</h3>
+        <p style="color:#4a5568;line-height:1.7;margin-bottom:24px;">Acesse os documentos de constituição, estatuto e registros oficiais do Instituto Brasileiro Logos.</p>
+        <div class="docs-grid">
+          <a href="documentos/sede.pdf" target="_blank" class="doc-card">
+            <div class="doc-icon">🏛️</div>
+            <div class="doc-title">Estatuto Social</div>
+            <div class="doc-desc">Documento de criação e definição de objetivos institucionais.</div>
+            <div class="doc-badge">✓ Registrado</div>
+          </a>
+          <a href="documentos/ata.pdf" target="_blank" class="doc-card">
+            <div class="doc-icon">📝</div>
+            <div class="doc-title">Atas de Reunião</div>
+            <div class="doc-desc">Registros das decisões tomadas pela diretoria.</div>
+            <div class="doc-badge">✓ Verificado</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPLOAD -->
+    <div class="tab-content" id="tab-upload">
+      <h3 style="font-family:'Sora',sans-serif;font-size:20px;margin-bottom:8px;">Anexar Novos Arquivos</h3>
+      <p style="color:#4a5568;font-size:14px;margin-bottom:24px;">Faça upload de documentos para publicar na área de transparência. Formatos aceitos: PDF, DOC, DOCX, XLS, XLSX.</p>
+
+      <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-icon">📁</div>
+        <div class="upload-text">Clique para selecionar arquivos</div>
+        <div class="upload-sub">ou arraste e solte aqui · PDF, DOC, XLS até 20 MB</div>
+        <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.xls,.xlsx" multiple style="display:none" onchange="handleFiles(this.files)"/>
+      </div>
+
+      <div id="uploadedFilesList" style="display:none;">
+        <h4 style="font-family:'Sora',sans-serif;font-size:15px;margin-bottom:14px;color:var(--navy);">Arquivos selecionados:</h4>
+        <div id="filesListItems" style="display:flex;flex-direction:column;gap:10px;"></div>
+        <button onclick="publishFiles()" style="margin-top:20px;background:var(--blue);color:white;border:none;padding:12px 24px;border-radius:10px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;cursor:pointer;">
+          Publicar Documentos
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contato">
+  <div>
+    <strong>Instituto Brasileiro Logos – IBL</strong><br>
+    © 2026 · Todos os direitos reservados
+  </div>
+  <div class="footer-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#transparencia">Transparência</a>
+    <a href="mailto:contato@ibl.org.br">contato@ibl.org.br</a>
+  </div>
+</footer>
+
+<script>
+  // Hero slider
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+
+  function goSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = n;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  setInterval(() => goSlide((currentSlide + 1) % slides.length), 5000);
+
+  // Tabs
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Search
+  function handleSearch(query) {
+    const q = query.toLowerCase();
+    const cards = document.querySelectorAll('#docsGrid .doc-card');
+
+    // Switch to documents tab if not already
+    showTab('documentos', document.querySelector('.tab-btn'));
+
+    cards.forEach(card => {
+      const searchable = (card.dataset.search + ' ' + card.querySelector('.doc-title').textContent).toLowerCase();
+      card.style.display = searchable.includes(q) || q === '' ? '' : 'none';
+    });
+  }
+
+  // File upload
+  function handleFiles(files) {
+    const list = document.getElementById('filesListItems');
+    const wrap = document.getElementById('uploadedFilesList');
+    list.innerHTML = '';
+    Array.from(files).forEach(file => {
+      const item = document.createElement('div');
+      item.style.cssText = 'display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8fafd;border-radius:10px;border:1px solid #e8edf5;';
+      item.innerHTML = `<span style="font-size:22px">${file.name.endsWith('.pdf') ? '📄' : '📊'}</span>
+        <div>
+          <div style="font-weight:600;font-size:14px">${file.name}</div>
+          <div style="font-size:12px;color:#8898aa">${(file.size / 1024).toFixed(0)} KB</div>
+        </div>`;
+      list.appendChild(item);
+    });
+    wrap.style.display = 'block';
+  }
+
+  function publishFiles() {
+    alert('Funcionalidade de publicação disponível com integração ao servidor. Arquivos selecionados com sucesso!');
+  }
+
+  // Drag & drop
+  const uploadArea = document.querySelector('.upload-area');
+  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = 'var(--sky)'; });
+  uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = '#c8d8ef'; });
+  uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#c8d8ef';
+    handleFiles(e.dataTransfer.files);
+  });
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id], div[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
 </body>
 </html>
