@@ -762,44 +762,30 @@
   <h2 class="section-heading">Transparência institucional</h2>
   <p class="section-sub">Acesse nossos documentos oficiais, registros e informações institucionais.</p>
 
+  
   <div class="docs-grid" id="docsGrid">
-        <a href="documentos/ata.pdf" target="_blank" class="doc-card" data-search="ata assembleia decisoes registros">
+        <a href="ata.pdf" target="_blank" class="doc-card" data-search="ata assembleia decisoes registros">
           <div class="doc-icon">📄</div>
           <div class="doc-title">Ata da Assembleia</div>
-          <div class="doc-desc">Decisões e registros oficiais das assembleias do instituto.</div>
+          <div class="doc-desc">Documento oficial da ata da assembleia do instituto.</div>
           <div class="doc-badge">✓ Verificado</div>
         </a>
-        <a href="documentos/sede.pdf" target="_blank" class="doc-card" data-search="sede objetivos institucional estatuto">
+
+        <a href="sede.pdf" target="_blank" class="doc-card" data-search="sede objetivos institucional">
           <div class="doc-icon">🏛️</div>
           <div class="doc-title">Sede e Objetivos</div>
-          <div class="doc-desc">Definição institucional e objetivos do instituto.</div>
+          <div class="doc-desc">Documento institucional com sede e objetivos do IBL.</div>
           <div class="doc-badge">✓ Verificado</div>
         </a>
-        <a href="documentos/fiscal.pdf" target="_blank" class="doc-card" data-search="fiscal regularidade tributaria certidao">
+
+        <a href="fiscal.pdf" target="_blank" class="doc-card" data-search="fiscal regularidade tributaria certidao">
           <div class="doc-icon">📊</div>
           <div class="doc-title">Situação Fiscal</div>
-          <div class="doc-desc">Dados e comprovantes de regularidade fiscal.</div>
+          <div class="doc-desc">Comprovantes e informações de regularidade fiscal.</div>
           <div class="doc-badge">✓ Verificado</div>
         </a>
-        <div class="doc-card" data-search="edital convocacao assembleia extraordinaria" onclick="openPDF('edital')" style="cursor:pointer">
-          <div class="doc-icon">📢</div>
-          <div class="doc-title">Edital de Convoção</div>
-          <div class="doc-desc">Convocação da Assembleia Geral Extraordinária – maio de 2026.</div>
-          <div class="doc-badge">✓ Verificado</div>
-        </div>
-        <div class="doc-card" data-search="ata assembleia extraordinaria 2026 endereco sede" onclick="openPDF('ata_extra')" style="cursor:pointer">
-          <div class="doc-icon">📝</div>
-          <div class="doc-title">Ata da Assembleia Extraordinária</div>
-          <div class="doc-desc">Registro da Assembleia Geral Extraordinária realizada em 21/05/2026.</div>
-          <div class="doc-badge">✓ Verificado</div>
-        </div>
-        <div class="doc-card" data-search="estatuto social regimento interno normas" onclick="openPDF('estatuto')" style="cursor:pointer">
-          <div class="doc-icon">📜</div>
-          <div class="doc-title">Estatuto Social</div>
-          <div class="doc-desc">Estatuto Social do Instituto Brasileiro Logos – IBL, com reconhecimento de firma.</div>
-          <div class="doc-badge">✓ Verificado</div>
-        </div>
       </div>
+
 </section>
 
 <!-- FOOTER -->
@@ -834,10 +820,9 @@
 
   // All searchable docs
   const allDocs = [
-    { icon: '📄', title: 'Ata da Assembleia', desc: 'Decisões e registros oficiais', href: 'documentos/ata.pdf', tags: 'ata assembleia decisoes registros' },
-    { icon: '🏛️', title: 'Sede e Objetivos', desc: 'Definição institucional', href: 'documentos/sede.pdf', tags: 'sede objetivos institucional estatuto' },
-    { icon: '📊', title: 'Situação Fiscal', desc: 'Dados e regularidade fiscal', href: 'documentos/fiscal.pdf', tags: 'fiscal dados regularidade tributaria certidao' },
-    { icon: '📋', title: 'Relatório Contábil', desc: 'Demonstrativos contábeis', href: 'documentos/fiscal.pdf', tags: 'contabil relatorio demonstrativos prestacao contas' },
+    { icon: '📄', title: 'Ata da Assembleia', desc: 'Documento oficial da ata da assembleia', href: 'ata.pdf', tags: 'ata assembleia decisoes registros' },
+    { icon: '🏛️', title: 'Sede e Objetivos', desc: 'Documento institucional do IBL', href: 'sede.pdf', tags: 'sede objetivos institucional' },
+    { icon: '📊', title: 'Situação Fiscal', desc: 'Regularidade fiscal e certidões', href: 'fiscal.pdf', tags: 'fiscal regularidade tributaria certidao' },
   ];
 
   const searchInput = document.getElementById('searchInput');
